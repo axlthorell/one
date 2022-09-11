@@ -1,4 +1,6 @@
-binary_sensor:    
+binary_sensor:
+  - platform: template
+    sensors:
       billig_el_behov:
         value_template: >-
          {{not(state_attr('sensor.nordpool_kwh_se3_sek_2_08_025', 'current_price') > (state_attr('sensor.nordpool_kwh_se3_sek_2_08_025', 'today')|sort)[states('input_number.elpris_timmar')|int -1 ] and state_attr('sensor.nordpool_kwh_se3_sek_2_08_025', 'current_price') > state_attr('sensor.nordpool_kwh_se3_sek_2_08_025', 'min') + states('input_number.elbehov_offset')|float)}}
