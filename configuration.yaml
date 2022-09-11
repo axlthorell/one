@@ -1,0 +1,18 @@
+binary_sensor:    
+      billig_el_behov:
+        value_template: >-
+         {{not(state_attr('sensor.nordpool_kwh_se3_sek_2_08_025', 'current_price') > (state_attr('sensor.nordpool_kwh_se3_sek_2_08_025', 'today')|sort)[states('input_number.elpris_timmar')|int -1 ] and state_attr('sensor.nordpool_kwh_se3_sek_2_08_025', 'current_price') > state_attr('sensor.nordpool_kwh_se3_sek_2_08_025', 'min') + states('input_number.elbehov_offset')|float)}}
+        friendly_name: Billig el behovstyrd
+
+input_number:
+  elbehov_offset:
+    name: Elbehov offset
+    min: 0
+    max: 100
+    step: 5
+    unit_of_measurement: Öre/kWh
+  elpris_timmar:
+    name: Elbehov i timmar
+    min: 1
+    max: 24
+    step: 1
